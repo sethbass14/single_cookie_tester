@@ -1,4 +1,4 @@
-### Single Cookie Replenishment Tester
+# Single Cookie Replenishment Tester
 
 This is a single cookie tester meant to test individual cookies in a cookie string to isolate which cookie is responsible for storing cart data.
 
