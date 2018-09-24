@@ -1,20 +1,19 @@
-var cookie = "optimizelyBuckets=%7B%7D mr_referredVisitor=0; JSESSIONID=0B71C0CC8EEF46AF0C2D29B1455201E3.prod_store05-5; anonymousOrderCookie=zTwubf+9OK3+p9/BLUdCGA==; utag_main=v_id:0165aa25c984001158a8151192a503079002307100bd0$_sn:1$_ss:0$_st:1536160532703$ses_id:1536157927816%3Bexp-session$_pn:40%3Bexp-session"
-
+var cookie = 'test=cookie; '
 function SingleCookieTester(cookie) {
-  var cookieArray = cookie.split(';').filter(Boolean);
+  var cookieArray = cookie.split('; ').filter(Boolean);
   var cookieObjs = makeObjs(cookieArray)
   var cid = parseInt(localStorage.getItem('cid'))
   var testCookie = findCookieToTest(cid, cookieObjs)
   if (bouncex.vars.cart_qty) {
     var cartCookie = cookieObjs.filter(function(cookie) { return cookie.id === cid })[0]
     localStorage.removeItem('cid');
-    alert(`Your Cart Cookie name is: ${cartCookie.name}` );
+    console.log(`%cHEY BOUNCEX DEV, YOUR CART COOKIE NAME IS: ${cartCookie.name}`, "color:magenta" );
   } else if (testCookie){
     localStorage.setItem('cid', testCookie.id)
     replaceCookie(testCookie)
   } else {
     localStorage.removeItem('cid');
-    alert("You are out of cookies and the key was not found")
+    console.log("%cYou are out of cookies and the key was not found", "color:magenta")
   }
 
 }
@@ -24,9 +23,9 @@ function makeObjs(cookieArray) {
 }
 
 function makeCookieObj(cookie, index) {
-  var splitCookie =  cookie.trim().split('=').filter(Boolean);
+  var splitCookie = cookie.split(/(=)/)
   var name = splitCookie[0]
-  var value = splitCookie[1]
+  var value = splitCookie.slice(2).join('') || 'Cookie value is not set'
   var cookieObj = {
     id: index + 1,
     name: name,
@@ -56,16 +55,16 @@ function replaceCookie(cookieObj) {
       name: name,
       value: '0',
       days: -1,
-      domain: domain
-    });
-    /* write cookie value saved from previous session */
-    bouncex.utils.cookies.create({
-      name: name,
-      value: val,
-      domain: domain
+      domain: domains[k]
     });
   }
-  console.log("NAME: ", name, " VALUE: ", val)
+  /* write cookie value saved from previous session */
+  bouncex.utils.cookies.create({
+    name: name,
+    value: val,
+    domain: domains[k]
+  });
+  console.log("NAME: ", name, " VALUE: ", val, 'ID: ', id)
   window.location.href = window.location.href
 }
 
