@@ -14,7 +14,7 @@ This is a single cookie tester meant to test individual cookies in a cookie stri
 * When the cart quantity changes, execute the script once more. You will see a message in magenta in the console with the name of the cart cookie.
 * If the cart quantity does not change and you run out of cookies to test, then a message will log to the console telling you that you have run out of cookies. This usually means that we can write the cart cookie or the cart cookie depends on multiple cookies.
 
-`var cookie = 'test=cookie; '
+`var cookie = 'test=cookie;'
 function SingleCookieTester(cookie) {
   var cookieArray = cookie.split('; ').filter(Boolean);
   var cookieObjs = makeObjs(cookieArray)
@@ -23,7 +23,7 @@ function SingleCookieTester(cookie) {
   if (bouncex.vars.cart_qty) {
     var cartCookie = cookieObjs.filter(function(cookie) { return cookie.id === cid })[0]
     localStorage.removeItem('cid');
-    console.log(`%cHEY BOUNCEX DEV, YOUR CART COOKIE NAME IS: ${cartCookie.name}`, "color:magenta" );
+    console.log("%cHEY BOUNCEX DEV, YOUR CART COOKIE NAME IS: ", "color:magenta", cartCookie.name );
   } else if (testCookie){
     localStorage.setItem('cid', testCookie.id)
     replaceCookie(testCookie)
