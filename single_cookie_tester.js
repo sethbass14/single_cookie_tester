@@ -7,7 +7,7 @@ function SingleCookieTester(cookie) {
   if (bouncex.vars.cart_qty) {
     var cartCookie = cookieObjs.filter(function(cookie) { return cookie.id === cid })[0]
     localStorage.removeItem('cid');
-    console.log(`%cHEY BOUNCEX DEV, YOUR CART COOKIE NAME IS: ${cartCookie.name}`, "color:magenta" );
+    console.log("%cHEY BOUNCEX DEV, YOUR CART COOKIE NAME IS: ", "color:magenta", cartCookie.name );
   } else if (testCookie){
     localStorage.setItem('cid', testCookie.id)
     replaceCookie(testCookie)
