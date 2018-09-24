@@ -1,4 +1,4 @@
-var cookie = 'test=cookie; '
+var cookie = 'test=cookie;'
 function SingleCookieTester(cookie) {
   var cookieArray = cookie.split('; ').filter(Boolean);
   var cookieObjs = makeObjs(cookieArray)
