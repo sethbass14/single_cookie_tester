@@ -4,24 +4,26 @@ This is a single cookie tester meant to test individual cookies in a cookie stri
 
 ## How to use Single Cookie Tester
 
-* Go to site, add an item to cart
+* Before using the Single Cookie Tester, be sure to use `cookietester` in the integrations repo to make sure that cookie replenishment is feasible: https://github.com/bounceexchange/dev-docs/blob/master/integration/cookietester.md
+* If cookie replenishment is feasible, let's rokc. Go to site, add an item to cart
+* Be sure that `bouncex.vars.cart_qty` or `bouncex.vars.cart_quantity` reflect the number of items in cart. If the variable is named something else, add it to the if conditional in line 26 below.
 * Open javascript console, enter `document.cookie`
-* Copy the cookie string
-* Start a new session and go to site
-* Execute the following script, replacing the value for "cookie" with the value you copied
+* Copy the cookie string there
+* Start a new private session and go to site
+* Execute the following script, replacing the value for "cookie" with the `document.cookie` value that you copied
 * The script goes through each cookie in the new sessions, and replaces it the cookie from the old sessions. The browser will automatically refresh.
 * Until you see the cart quantity change on site, continue to execute the script by copying and pasting it into the console (or pressing the up arrow and enter)
 * When the cart quantity changes, execute the script once more. You will see a message in magenta in the console with the name of the cart cookie.
-* If the cart quantity does not change and you run out of cookies to test, then a message will log to the console telling you that you have run out of cookies. This usually means that we can write the cart cookie or the cart cookie depends on multiple cookies.
+* If the cart quantity does not change and you run out of cookies to test, a message will log to the console telling you that you have run out of cookies. This usually means that we cannot write the cart cookie or the cart depends on multiple cookies.
 
 ```
-var cookie = 'test=cookie;'
+var cookie = 'test=hiseth;'
 function SingleCookieTester(cookie) {
   var cookieArray = cookie.split('; ').filter(Boolean);
   var cookieObjs = makeObjs(cookieArray)
   var cid = parseInt(localStorage.getItem('cid'))
   var testCookie = findCookieToTest(cid, cookieObjs)
-  if (bouncex.vars.cart_qty) {
+  if (bouncex.vars.cart_qty || bouncex.vars.cart_quantity) {
     var cartCookie = cookieObjs.filter(function(cookie) { return cookie.id === cid })[0]
     localStorage.removeItem('cid');
     console.log("%cHEY BOUNCEX DEV, YOUR CART COOKIE NAME IS: ", "color:magenta", cartCookie.name );
