@@ -5,7 +5,7 @@ This is a single cookie tester meant to test individual cookies in a cookie stri
 ## How to use Single Cookie Tester
 
 * Before using the Single Cookie Tester, be sure to use `cookietester` in the integrations repo to make sure that cookie replenishment is feasible: https://github.com/bounceexchange/dev-docs/blob/master/integration/cookietester.md
-* If cookie replenishment is feasible, let's rokc. Go to site, add an item to cart
+* If cookie replenishment is feasible, let's rock. Go to site, add an item to cart
 * Be sure that `bouncex.vars.cart_qty` or `bouncex.vars.cart_quantity` reflect the number of items in cart. If the variable is named something else, add it to the if conditional in line 26 below.
 * Open javascript console, enter `document.cookie`
 * Copy the cookie string there
